@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="trace">
+    <Appenders>
+        <RollingFile name="ALL" fileName="../logs/sample/all.log"
+                     filePattern="../logs/sample/$${date:yyyy-MM}/%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout>
+                <pattern>%d %p %C{1.} [%t] %m%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="5 MB"/>
+            </Policies>
+        </RollingFile>
+        <Async name="ASYNC">
+            <AppenderRef ref="ALL"/>
+        </Async>
+        <Console name="CONSOLE" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+        <RollingFile name="SAMPLE" fileName="../logs/sample/sample.log"
+                     filePattern="../logs/sample/$${date:yyyy-MM}/%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout>
+                <pattern>%d %p %C{1.} [%t] %m%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="5 MB"/>
+            </Policies>
+        </RollingFile>
+        <RollingFile name="PAYMENTS" fileName="../logs/sample/payments.log"
+                     filePattern="../logs/sample/$${date:yyyy-MM}/%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout>
+                <pattern>%d %p %C{1.} [%t] %m%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="1 MB"/>
+            </Policies>
+        </RollingFile>
+        <RollingFile name="LIBS" fileName="../logs/sample/libs.log"
+                     filePattern="../logs/sample/$${date:yyyy-MM}/%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout>
+                <pattern>%d %p %C{1.} [%t] %m%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="5 MB"/>
+            </Policies>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Logger name="by.belorusneft.sample" level="trace">
+            <AppenderRef ref="SAMPLE"/>
+            <AppenderRef ref="CONSOLE"/>
+        </Logger>
+        <Logger name="org.restlet" level="debug">
+            <AppenderRef ref="SAMPLE"/>
+            <AppenderRef ref="CONSOLE"/>
+        </Logger>
+        <Logger name="org.eclipse.persistence" level="debug">
+            <AppenderRef ref="LIBS"/>
+        </Logger>
+        <Logger name="com.softteco" level="debug">
+            <AppenderRef ref="SAMPLE"/>
+            <AppenderRef ref="CONSOLE"/>
+        </Logger>
+        <Root level="all">
+            <AppenderRef ref="ASYNC"/>
+        </Root>
+    </Loggers>
+</Configuration>

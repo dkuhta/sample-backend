@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="trace">
+    <Appenders>
+        <appender name="AdministratorEmail" class="org.apache.log4j.net.SMTPAppender">
+            <param name="BufferSize" value="512" />
+            <param name="SMTPHost" value="smpt.host" />
+            <param name="SMTPUsername" value="sample@gmail.com" />
+            <param name="SMTPPassword" value="776hjhhFkj" />
+            <param name="From" value="sample@gmail.com" />
+            <param name="To" value="serge@softteco.com" />
+            <param name="Subject" value="Sample on Prod" />
+            <layout class="org.apache.log4j.PatternLayout">
+                <param name="ConversionPattern" value="[%d{ISO8601}]%n%n%-5p%n%n%c%n%n%m%n%n" />
+            </layout>
+            <filter class="org.apache.log4j.varia.LevelRangeFilter">
+                <param name="LevelMin" value="error" />
+                <param name="LevelMax" value="fatal" />
+            </filter>
+        </appender>
+        <RollingFile name="ALL" fileName="/opt/sample/logs/all.log"
+                     filePattern="/opt/sample/logs/$${date:yyyy-MM}/%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout>
+                <pattern>%d %p %C{1.} [%t] %m%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="5 MB"/>
+            </Policies>
+        </RollingFile>
+        <Async name="ASYNC">
+            <AppenderRef ref="ALL"/>
+        </Async>
+        <Console name="CONSOLE" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+        <RollingFile name="SAMPLE" fileName="/opt/sample/logs/sample.log"
+                     filePattern="/opt/sample/logs/$${date:yyyy-MM}/%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout>
+                <pattern>%d %p %C{1.} [%t] %m%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="5 MB"/>
+            </Policies>
+        </RollingFile>
+        <RollingFile name="LIBS" fileName="/opt/sample/logs/libs.log"
+                     filePattern="/opt/sample/logs/$${date:yyyy-MM}/%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout>
+                <pattern>%d %p %C{1.} [%t] %m%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="5 MB"/>
+            </Policies>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Logger name="com.sample" level="trace">
+            <AppenderRef ref="SAMPLE"/>
+        </Logger>
+        <Logger name="org.restlet" level="error">
+            <AppenderRef ref="SAMPLE"/>
+        </Logger>
+        <Logger name="org.eclipse.persistence" level="error">
+            <AppenderRef ref="LIBS"/>
+        </Logger>
+        <Logger name="com.softteco" level="error">
+            <AppenderRef ref="SAMPLE"/>
+        </Logger>
+        <Root level="all">
+            <AppenderRef ref="ASYNC"/>
+        </Root>
+    </Loggers>
+</Configuration>
