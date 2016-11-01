@@ -1,5 +1,7 @@
 package com.sample;
 
+import com.sample.auth.AuthService;
+import com.sample.auth.AuthServiceBean;
 import com.softteco.toolset.AbstractApplicationModule;
 import com.softteco.toolset.restlet.AbstractRestletApplication;
 import com.softteco.toolset.restlet.UserSession;
@@ -31,5 +33,10 @@ public class ApplicationModule extends AbstractApplicationModule {
         return new String[] {
                 ApplicationUtils.getAppPath() + "config.properties"
         };
+    }
+
+    @Override
+    protected void configureApplication() {
+        bind(AuthService.class).to(AuthServiceBean.class);
     }
 }

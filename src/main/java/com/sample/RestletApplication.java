@@ -1,5 +1,6 @@
 package com.sample;
 
+import com.sample.auth.AuthResource;
 import com.softteco.toolset.restlet.AbstractRestletApplication;
 import com.softteco.toolset.restlet.AbstractStatusService;
 import com.sample.persons.PersonsResource;
@@ -20,6 +21,7 @@ public class RestletApplication extends AbstractRestletApplication {
 
     @Override
     protected void createInboundRoot(final Router router) {
+        router.attach("/auth", AuthResource.class);
         router.attach("/persons", PersonsResource.class);
 
         /*
