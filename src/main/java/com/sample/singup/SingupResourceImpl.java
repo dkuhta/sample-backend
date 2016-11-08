@@ -1,5 +1,7 @@
 package com.sample.singup;
 
+import com.google.inject.Inject;
+import com.sample.accounts.AccountService;
 import com.softteco.toolset.restlet.AbstractResource;
 import com.softteco.toolset.restlet.UserSession;
 
@@ -10,8 +12,12 @@ import com.softteco.toolset.restlet.UserSession;
  * @since JDK1.8
  */
 public class SingupResourceImpl extends AbstractResource<UserSession> implements SingupResource {
+    
+    @Inject
+    private AccountService accountService;
+    
     @Override
     public void singup(final SingupDto dto) {
-
+        accountService.singup(dto);
     }
 }

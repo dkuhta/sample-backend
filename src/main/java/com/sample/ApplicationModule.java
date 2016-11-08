@@ -7,6 +7,8 @@ import com.softteco.toolset.AbstractApplicationModule;
 import com.softteco.toolset.restlet.AbstractRestletApplication;
 import com.softteco.toolset.restlet.UserSession;
 
+import java.io.File;
+
 /**
  * @author serge
  */
@@ -29,8 +31,13 @@ public class ApplicationModule extends AbstractApplicationModule {
 
     @Override
     protected String[] getPropertiesFiles() {
+        String configFile = "/opt/sample/config.properties";
+        if (!new File(configFile).exists()) {
+            configFile = ApplicationUtils.getAppPath() + "config.properties";
+        }
         return new String[]{
-                ApplicationUtils.getAppPath() + "config.properties"
+                ApplicationUtils.getAppPath() + "config-common.properties",
+                configFile
         };
     }
 

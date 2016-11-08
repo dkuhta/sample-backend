@@ -1,6 +1,7 @@
 package com.sample.auth;
 
 import com.google.inject.ImplementedBy;
+import com.sample.accounts.AccountDto;
 import com.softteco.toolset.restlet.AuthorizationException;
 
 /**
@@ -12,7 +13,9 @@ import com.softteco.toolset.restlet.AuthorizationException;
 @ImplementedBy(AuthServiceBean.class)
 public interface AuthService {
 
-    ProfileDto getCurrent();
+    AccountDto getCurrent() throws AuthorizationException;
 
-    ProfileDto authorize(AuthDto dto) throws AuthorizationException;
+    AccountDto authorize(AuthDto dto) throws AuthorizationException;
+
+    void logout(LogoutDto dto);
 }

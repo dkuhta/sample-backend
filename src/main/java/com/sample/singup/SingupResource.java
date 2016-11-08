@@ -18,9 +18,10 @@ public interface SingupResource {
 
     @ApiOperation(value = "Sing up", tags = "singup")
     @ApiResponses(value = {
-            @ApiResponse(code = HttpURLConnection.HTTP_OK, message = "OK"),
+            @ApiResponse(code = HttpURLConnection.HTTP_NO_CONTENT, message = "OK"),
             @ApiResponse(code = 409, message = "Entity already exists"),
-            @ApiResponse(code = 422, message = "Unprocessable Entity")
+            @ApiResponse(code = 422, message = "Unprocessable Entity"),
+            @ApiResponse(code = 500, message = "Internal server error")
     })
     @Post("json")
     void singup(SingupDto dto);
