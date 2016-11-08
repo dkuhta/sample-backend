@@ -15,7 +15,7 @@
         <reporting.findbugs.plugin>3.0.0</reporting.findbugs.plugin>
         <reporting.javancss.plugin>2.1</reporting.javancss.plugin>
         <reporting.cobertura.plugin>2.6</reporting.cobertura.plugin>
-        <restlet-version>2.3.4</restlet-version>
+        <restlet-version>2.3.7</restlet-version>
         <netbeans.hint.deploy.server>Tomcat</netbeans.hint.deploy.server>
     </properties>
 
@@ -279,6 +279,12 @@
             <groupId>org.restlet.jse</groupId>
             <artifactId>org.restlet.ext.swagger</artifactId>
             <version>${restlet-version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator-annotation-processor</artifactId>
+            <version>4.1.0.Final</version>
         </dependency>
     </dependencies>
 

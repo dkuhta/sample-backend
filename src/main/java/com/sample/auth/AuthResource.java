@@ -1,36 +1,44 @@
 package com.sample.auth;
 
-import com.google.inject.Inject;
-import com.softteco.toolset.restlet.AbstractResource;
 import com.softteco.toolset.restlet.AuthorizationException;
-import com.softteco.toolset.restlet.UserSession;
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiResponse;
+import com.wordnik.swagger.annotations.ApiResponses;
+import org.apache.commons.httpclient.util.HttpURLConnection;
 import org.restlet.resource.Delete;
 import org.restlet.resource.Get;
 import org.restlet.resource.Post;
 
 /**
- * Created on 1.11.16.
+ * Created on 3.11.16.
  *
  * @author Denis Kuhta
  * @since JDK1.8
  */
-public class AuthResource extends AbstractResource<UserSession> {
+@Api(value = "/auth", description = "Auth resource")
+public interface AuthResource {
 
-    @Inject
-    private AuthService authService;
-
+    @ApiOperation(value = "Get current profile", tags = "auth")
+    @ApiResponses(value = {
+            @ApiResponse(code = HttpURLConnection.HTTP_OK, message = "OK"),
+            @ApiResponse(code = HttpURLConnection.HTTP_UNAUTHORIZED, message = "Unauthorized")
+    })
     @Get("json")
-    public ProfileDto getProfile() {
-        return authService.getCurrent();
-    }
+    ProfileDto getProfile();
 
+    @ApiOperation(value = "Login", tags = "auth")
+    @ApiResponses(value = {
+            @ApiResponse(code = HttpURLConnection.HTTP_OK, message = "OK"),
+            @ApiResponse(code = 422, message = "Unprocessable Entity")
+    })
     @Post("json")
-    public ProfileDto authorize(final AuthRequestDto dto) throws AuthorizationException {
-        return authService.authorize(dto);
-    }
+    ProfileDto login(AuthDto dto) throws AuthorizationException;
 
+    @ApiOperation(value = "Logout", tags = "auth")
+    @ApiResponses(value = {
+            @ApiResponse(code = HttpURLConnection.HTTP_NO_CONTENT, message = "OK")
+    })
     @Delete("json")
-    public void logout() {
-        getHttpServletRequest().getSession().invalidate();
-    }
+    void logout();
 }

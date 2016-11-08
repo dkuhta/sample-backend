@@ -1,7 +1,7 @@
 package com.sample.auth;
 
+import com.google.inject.ImplementedBy;
 import com.softteco.toolset.restlet.AuthorizationException;
-import com.softteco.toolset.security.AssertAuthorizedUser;
 
 /**
  * Created on 1.11.16.
@@ -9,9 +9,10 @@ import com.softteco.toolset.security.AssertAuthorizedUser;
  * @author Denis Kuhta
  * @since JDK1.8
  */
+@ImplementedBy(AuthServiceBean.class)
 public interface AuthService {
 
     ProfileDto getCurrent();
 
-    ProfileDto authorize(AuthRequestDto dto) throws AuthorizationException;
+    ProfileDto authorize(AuthDto dto) throws AuthorizationException;
 }

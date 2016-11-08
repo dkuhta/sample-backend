@@ -12,8 +12,9 @@ import javax.persistence.Id;
 @Entity
 public class PersonEntity implements Serializable {
 
+    private static final long serialVersionUID = -1958421373759856954L;
+
     private Long id;
-    private String account;
     private String name;
 
     @Id
@@ -24,14 +25,6 @@ public class PersonEntity implements Serializable {
 
     public void setId(final Long id) {
         this.id = id;
-    }
-
-    public String getAccount() {
-        return account;
-    }
-
-    public void setAccount(final String account) {
-        this.account = account;
     }
 
     public String getName() {

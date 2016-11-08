@@ -6,7 +6,10 @@ import com.softteco.toolset.dto.PageInfoDto;
 import com.softteco.toolset.restlet.AbstractResource;
 import com.sample.I18nServiceBean;
 import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiImplicitParams;
+import com.wordnik.swagger.annotations.ApiImplicitParam;
 import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiParam;
 import com.wordnik.swagger.annotations.ApiResponse;
 import com.wordnik.swagger.annotations.ApiResponses;
 import org.restlet.resource.Get;
@@ -30,6 +33,10 @@ public class PersonsResource extends AbstractResource {
     private I18nServiceBean i18nServiceBean;
 
     @ApiOperation(value = "list the persons", tags = "person", response = PersonsListDto.class)
+    @ApiParam(name = "name", value = "User's name", required = true)
+    @ApiImplicitParams(value = {
+            @ApiImplicitParam(name = "search", value = "Search string", required = true, dataType = "string", paramType = "query")
+    })
     @ApiResponses({ @ApiResponse(code = 200, message = "the list of persons"), })
     @Get("json")
     public PersonsListDto getAll() {

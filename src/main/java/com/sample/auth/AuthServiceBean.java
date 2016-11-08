@@ -25,7 +25,7 @@ public class AuthServiceBean implements AuthService {
     }
 
     @Override
-    public ProfileDto authorize(final AuthRequestDto dto) throws AuthorizationException {
+    public ProfileDto authorize(final AuthDto dto) throws AuthorizationException {
         userSession.setUsername(dto.getUsername());
         ProfileDto profileDto = new ProfileDto();
         profileDto.setUsername(userSession.getUsername());

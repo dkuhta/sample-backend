@@ -2,13 +2,12 @@ package com.sample;
 
 import com.sample.auth.AuthService;
 import com.sample.auth.AuthServiceBean;
+import com.sample.util.ApplicationUtils;
 import com.softteco.toolset.AbstractApplicationModule;
 import com.softteco.toolset.restlet.AbstractRestletApplication;
 import com.softteco.toolset.restlet.UserSession;
-import com.sample.util.ApplicationUtils;
 
 /**
- *
  * @author serge
  */
 public class ApplicationModule extends AbstractApplicationModule {
@@ -30,13 +29,13 @@ public class ApplicationModule extends AbstractApplicationModule {
 
     @Override
     protected String[] getPropertiesFiles() {
-        return new String[] {
+        return new String[]{
                 ApplicationUtils.getAppPath() + "config.properties"
         };
     }
 
-    @Override
+    /*@Override
     protected void configureApplication() {
         bind(AuthService.class).to(AuthServiceBean.class);
-    }
+    }*/
 }
