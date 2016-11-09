@@ -18,4 +18,6 @@ public interface AccountDao {
     List<AccountEntity> findAll(PageInfoDto pageInfo);
 
     void persist(AccountEntity entity);
+
+    void flush();
 }

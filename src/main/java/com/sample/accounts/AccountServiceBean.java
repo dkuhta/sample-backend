@@ -5,6 +5,7 @@ import com.google.inject.persist.Transactional;
 import com.sample.accounts.roles.Role;
 import com.sample.accounts.roles.RoleEntity;
 import com.sample.accounts.roles.RoleService;
+import com.sample.mail.MailNotificationService;
 import com.sample.singup.SingupDto;
 import com.sample.util.PasswordUtils;
 
@@ -29,6 +30,9 @@ public class AccountServiceBean implements AccountService {
     @Inject
     private AccountDtoAssembler accountDtoAssembler;
 
+    @Inject
+    private MailNotificationService mailNotificationService;
+
     @Transactional
     @Override
     public AccountDto singup(final SingupDto dto) {
@@ -45,6 +49,9 @@ public class AccountServiceBean implements AccountService {
         roles.add(roleService.getRole(Role.USER));
         personE.setRoles(roles);
         accountDao.persist(personE);
+        accountDao.flush();
+
+        mailNotificationService.sendWelcomeEmail(dto.email);
 
         return accountDtoAssembler.assemble(personE);
     }

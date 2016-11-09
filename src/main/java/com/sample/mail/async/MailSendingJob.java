@@ -25,7 +25,7 @@ public class MailSendingJob extends AbstractJob {
     @Override
     public void execute(final JobExecutionContext jec) throws JobExecutionException {
         try {
-            System.out.println("Start sending MAIL " + jec.getJobDetail().getKey());
+            System.out.println("Mail sending job start " + jec.getJobDetail().getKey());
 
             final JobDataMap jobDataMap = jec.getJobDetail().getJobDataMap();
             final String email = (String) jobDataMap.get(EMAIL);
@@ -36,7 +36,7 @@ public class MailSendingJob extends AbstractJob {
         } catch (Exception e) {
             e.printStackTrace(System.out);
         } finally {
-            System.out.println("MAIL " + jec.getJobDetail().getKey() + " has been sent.");
+            System.out.println("Mail sending job finish " + jec.getJobDetail().getKey());
         }
     }
 }

@@ -20,6 +20,7 @@ public interface SingupResource {
     @ApiResponses(value = {
             @ApiResponse(code = HttpURLConnection.HTTP_NO_CONTENT, message = "OK"),
             @ApiResponse(code = 409, message = "Entity already exists"),
+            @ApiResponse(code = 415, message = "Unsupported Media Type"),
             @ApiResponse(code = 422, message = "Unprocessable Entity"),
             @ApiResponse(code = 500, message = "Internal server error")
     })

@@ -18,4 +18,9 @@ public class AccountDaoBean extends AbstractJpaDao<AccountEntity, Long> implemen
         query.setParameter("email", email);
         return getSingleResult(query);
     }
+
+    @Override
+    public void flush() {
+        getEntityManager().flush();
+    }
 }

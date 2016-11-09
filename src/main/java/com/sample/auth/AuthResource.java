@@ -32,6 +32,7 @@ public interface AuthResource {
     @ApiOperation(value = "Login", tags = "auth")
     @ApiResponses(value = {
             @ApiResponse(code = HttpURLConnection.HTTP_OK, message = "OK"),
+            @ApiResponse(code = 415, message = "Unsupported Media Type"),
             @ApiResponse(code = 422, message = "Unprocessable Entity"),
             @ApiResponse(code = 500, message = "Internal server error")
     })
