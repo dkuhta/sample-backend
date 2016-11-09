@@ -30,7 +30,7 @@ public class AccountEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(columnDefinition = "VARCHAR(255) NOT NULL")
+    @Column(columnDefinition = "VARCHAR(255) UNIQUE NOT NULL")
     private String email;
 
     @Column(columnDefinition = "VARCHAR(255) NOT NULL")

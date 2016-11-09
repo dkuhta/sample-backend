@@ -50,6 +50,8 @@ public class AccountServiceBean implements AccountService {
             throw new EntityExistsException("Account with this email already exists!");
         }
 
+        userSession.setLang(dto.lang);
+
         AccountEntity personE = new AccountEntity();
         personE.setEmail(dto.email);
         personE.setName(dto.name);

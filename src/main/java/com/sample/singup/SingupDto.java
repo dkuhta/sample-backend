@@ -15,6 +15,7 @@ public class SingupDto implements Serializable {
     public String email;
     public String name;
     public String password;
+    public String lang;
 
     public String getEmail() {
         return email;
@@ -38,5 +39,13 @@ public class SingupDto implements Serializable {
 
     public void setPassword(final String password) {
         this.password = password;
+    }
+
+    public String getLang() {
+        return lang;
+    }
+
+    public void setLang(final String lang) {
+        this.lang = lang;
     }
 }
