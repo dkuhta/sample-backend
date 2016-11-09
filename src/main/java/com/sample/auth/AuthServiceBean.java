@@ -2,10 +2,9 @@ package com.sample.auth;
 
 import com.google.inject.Inject;
 import com.sample.accounts.AccountDao;
+import com.sample.accounts.AccountDto;
 import com.sample.accounts.AccountDtoAssembler;
 import com.sample.accounts.AccountEntity;
-import com.sample.accounts.AccountService;
-import com.sample.accounts.AccountDto;
 import com.sample.accounts.AccountStatus;
 import com.sample.util.PasswordUtils;
 import com.softteco.toolset.restlet.AuthorizationException;
@@ -25,25 +24,10 @@ public class AuthServiceBean implements AuthService {
     private UserSession userSession;
 
     @Inject
-    private AccountService personService;
-
-    @Inject
     private AccountDao accountDao;
 
     @Inject
     private AccountDtoAssembler accountDtoAssembler;
-
-    @AssertAuthorizedUser
-    @Override
-    public AccountDto getCurrent() throws AuthorizationException {
-        AccountEntity accountE = accountDao.findByEmail(userSession.getUsername());
-
-        if (AccountStatus.DISABLED.equals(accountE.getStatus())) {
-            throw new AuthorizationException(AuthorizationStatus.DISABLED);
-        }
-
-        return accountDtoAssembler.assemble(accountE);
-    }
 
     @Override
     public AccountDto authorize(final AuthDto dto) throws AuthorizationException {

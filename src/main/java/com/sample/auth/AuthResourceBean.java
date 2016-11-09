@@ -17,10 +17,6 @@ public class AuthResourceBean extends AbstractResource<UserSession> implements A
     @Inject
     private AuthService authService;
 
-    public AccountDto getProfile() throws AuthorizationException {
-        return authService.getCurrent();
-    }
-
     public AccountDto login(final AuthDto dto) throws AuthorizationException {
         return authService.authorize(dto);
     }

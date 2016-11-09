@@ -1,14 +1,14 @@
 package com.sample.auth;
 
+import com.sample.HttpMessage;
 import com.sample.accounts.AccountDto;
 import com.softteco.toolset.restlet.AuthorizationException;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiResponse;
 import com.wordnik.swagger.annotations.ApiResponses;
-import org.apache.commons.httpclient.util.HttpURLConnection;
+import org.apache.commons.httpclient.HttpStatus;
 import org.restlet.resource.Delete;
-import org.restlet.resource.Get;
 import org.restlet.resource.Post;
 
 /**
@@ -20,30 +20,21 @@ import org.restlet.resource.Post;
 @Api(value = "/auth", description = "Auth resource")
 public interface AuthResource {
 
-    @ApiOperation(value = "Get current profile", tags = "auth")
-    @ApiResponses(value = {
-            @ApiResponse(code = HttpURLConnection.HTTP_OK, message = "OK"),
-            @ApiResponse(code = HttpURLConnection.HTTP_UNAUTHORIZED, message = "Unauthorized"),
-            @ApiResponse(code = 500, message = "Internal server error")
-    })
-    @Get("json")
-    AccountDto getProfile() throws AuthorizationException;
-
     @ApiOperation(value = "Login", tags = "auth")
     @ApiResponses(value = {
-            @ApiResponse(code = HttpURLConnection.HTTP_OK, message = "OK"),
-            @ApiResponse(code = 415, message = "Unsupported Media Type"),
-            @ApiResponse(code = 422, message = "Unprocessable Entity"),
-            @ApiResponse(code = 500, message = "Internal server error")
+            @ApiResponse(code = HttpStatus.SC_OK, message = HttpMessage.OK),
+            @ApiResponse(code = HttpStatus.SC_UNSUPPORTED_MEDIA_TYPE, message = HttpMessage.UNSUPPORTED_MEDIA_TYPE),
+            @ApiResponse(code = HttpStatus.SC_UNPROCESSABLE_ENTITY, message = HttpMessage.UNPROCESSABLE_ENTITY),
+            @ApiResponse(code = HttpStatus.SC_INTERNAL_SERVER_ERROR, message = HttpMessage.INTERNAL_SERVER_ERROR)
     })
     @Post("json")
     AccountDto login(AuthDto dto) throws AuthorizationException;
 
     @ApiOperation(value = "Logout", tags = "auth")
     @ApiResponses(value = {
-            @ApiResponse(code = HttpURLConnection.HTTP_NO_CONTENT, message = "OK"),
-            @ApiResponse(code = HttpURLConnection.HTTP_UNAUTHORIZED, message = "Unauthorized"),
-            @ApiResponse(code = 500, message = "Internal server error")
+            @ApiResponse(code = HttpStatus.SC_NO_CONTENT, message = HttpMessage.OK),
+            @ApiResponse(code = HttpStatus.SC_UNAUTHORIZED, message = HttpMessage.UNAUTHORIZED),
+            @ApiResponse(code = HttpStatus.SC_INTERNAL_SERVER_ERROR, message = HttpMessage.INTERNAL_SERVER_ERROR)
     })
     @Delete("json")
     void logout(LogoutDto dto);

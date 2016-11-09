@@ -1,5 +1,7 @@
 package com.sample.accounts;
 
+import com.softteco.toolset.bl.SkipAutoFill;
+
 import java.io.Serializable;
 import java.util.Set;
 
@@ -15,5 +17,6 @@ public class AccountDto implements Serializable {
 
     public String email;
     public String name;
+    @SkipAutoFill
     public Set<String> roles;
 }

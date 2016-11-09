@@ -13,8 +13,6 @@ import com.softteco.toolset.restlet.AuthorizationException;
 @ImplementedBy(AuthServiceBean.class)
 public interface AuthService {
 
-    AccountDto getCurrent() throws AuthorizationException;
-
     AccountDto authorize(AuthDto dto) throws AuthorizationException;
 
     void logout(LogoutDto dto);

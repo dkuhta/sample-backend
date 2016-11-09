@@ -2,6 +2,7 @@ package com.sample.accounts;
 
 import com.google.inject.ImplementedBy;
 import com.sample.singup.SingupDto;
+import com.softteco.toolset.restlet.AuthorizationException;
 
 /**
  * Created on 7.11.16.
@@ -13,4 +14,8 @@ import com.sample.singup.SingupDto;
 public interface AccountService {
 
     AccountDto singup(SingupDto dto);
+
+    AccountDto get() throws AuthorizationException;
+
+    AccountDto update(AccountDto dto);
 }
