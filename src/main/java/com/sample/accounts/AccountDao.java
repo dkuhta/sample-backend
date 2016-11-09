@@ -19,5 +19,7 @@ public interface AccountDao {
 
     void persist(AccountEntity entity);
 
+    AccountEntity merge(AccountEntity entity);
+
     void flush();
 }

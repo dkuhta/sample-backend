@@ -1,36 +1,37 @@
-package com.sample.auth;
+package com.sample.accounts.password;
 
+import com.google.inject.ImplementedBy;
 import com.sample.HttpMessage;
-import com.sample.accounts.AccountDto;
+import com.softteco.toolset.jpa.DataNotFoundException;
 import com.softteco.toolset.restlet.AuthorizationException;
-import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiResponse;
 import com.wordnik.swagger.annotations.ApiResponses;
 import org.apache.commons.httpclient.HttpStatus;
-import org.restlet.resource.Delete;
 import org.restlet.resource.Post;
+import org.restlet.resource.Put;
 
 /**
- * Created on 3.11.16.
+ * Created on 9.11.16.
  *
  * @author Denis Kuhta
  * @since JDK1.8
  */
-@Api(value = "/auth", description = "Auth resource")
-public interface AuthResource {
+@ImplementedBy(PasswordResourceBean.class)
+public interface PasswordResource {
 
-    @ApiOperation(value = "Login", tags = "auth")
+    @ApiOperation(value = "Reset password", tags = "password")
     @ApiResponses(value = {
-            @ApiResponse(code = HttpStatus.SC_OK, message = HttpMessage.OK),
+            @ApiResponse(code = HttpStatus.SC_NO_CONTENT, message = HttpMessage.OK),
+            @ApiResponse(code = HttpStatus.SC_NOT_FOUND, message = HttpMessage.NOT_FOUND),
             @ApiResponse(code = HttpStatus.SC_UNSUPPORTED_MEDIA_TYPE, message = HttpMessage.UNSUPPORTED_MEDIA_TYPE),
             @ApiResponse(code = HttpStatus.SC_UNPROCESSABLE_ENTITY, message = HttpMessage.UNPROCESSABLE_ENTITY),
             @ApiResponse(code = HttpStatus.SC_INTERNAL_SERVER_ERROR, message = HttpMessage.INTERNAL_SERVER_ERROR)
     })
     @Post("json")
-    AccountDto login(AuthDto dto) throws AuthorizationException;
+    void reset(PasswordResetDto dto) throws DataNotFoundException;
 
-    @ApiOperation(value = "Logout", tags = "auth")
+    @ApiOperation(value = "Update password", tags = "password")
     @ApiResponses(value = {
             @ApiResponse(code = HttpStatus.SC_NO_CONTENT, message = HttpMessage.OK),
             @ApiResponse(code = HttpStatus.SC_UNAUTHORIZED, message = HttpMessage.UNAUTHORIZED),
@@ -38,6 +39,6 @@ public interface AuthResource {
             @ApiResponse(code = HttpStatus.SC_UNPROCESSABLE_ENTITY, message = HttpMessage.UNPROCESSABLE_ENTITY),
             @ApiResponse(code = HttpStatus.SC_INTERNAL_SERVER_ERROR, message = HttpMessage.INTERNAL_SERVER_ERROR)
     })
-    @Delete("json")
-    void logout(LogoutDto dto);
+    @Put("json")
+    void update(PasswordUpdateDto dto) throws AuthorizationException;
 }

@@ -17,11 +17,11 @@ public class AccountResourceBean extends AbstractResource<UserSession> implement
     private AccountService accountService;
 
     public AccountDto getProfile() throws AuthorizationException {
-        return accountService.get();
+        return accountService.getAccount();
     }
 
     @Override
     public AccountDto update(final AccountDto dto) {
-        return accountService.update(dto);
+        return accountService.updateAccount(dto);
     }
 }

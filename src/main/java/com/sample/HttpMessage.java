@@ -13,4 +13,5 @@ public class HttpMessage {
     public static final String UNPROCESSABLE_ENTITY = "UNPROCESSABLE ENTITY";
     public static final String INTERNAL_SERVER_ERROR = "INTERNAL SERVER ERROR";
     public static final String ENTITY_ALREADY_EXISTS = "ENTITY ALREADY EXISTS";
+    public static final String NOT_FOUND = "OBJECT NOT FOUND";
 }

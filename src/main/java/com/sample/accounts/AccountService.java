@@ -1,7 +1,10 @@
 package com.sample.accounts;
 
 import com.google.inject.ImplementedBy;
+import com.sample.accounts.password.PasswordResetDto;
+import com.sample.accounts.password.PasswordUpdateDto;
 import com.sample.singup.SingupDto;
+import com.softteco.toolset.jpa.DataNotFoundException;
 import com.softteco.toolset.restlet.AuthorizationException;
 
 /**
@@ -15,7 +18,11 @@ public interface AccountService {
 
     AccountDto singup(SingupDto dto);
 
-    AccountDto get() throws AuthorizationException;
+    AccountDto getAccount() throws AuthorizationException;
 
-    AccountDto update(AccountDto dto);
+    AccountDto updateAccount(AccountDto dto);
+
+    void resetPassword(PasswordResetDto dto) throws DataNotFoundException;
+
+    void updatePassword(PasswordUpdateDto dto) throws AuthorizationException;
 }

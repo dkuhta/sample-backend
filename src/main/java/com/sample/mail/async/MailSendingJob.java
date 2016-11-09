@@ -34,7 +34,7 @@ public class MailSendingJob extends AbstractJob {
 
             mailService.send(email, subject, body);
         } catch (Exception e) {
-            e.printStackTrace(System.out);
+            System.out.println(e.getMessage());
         } finally {
             System.out.println("Mail sending job finish " + jec.getJobDetail().getKey());
         }

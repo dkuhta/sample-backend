@@ -1,6 +1,7 @@
 package com.sample;
 
 import com.sample.accounts.AccountResourceBean;
+import com.sample.accounts.password.PasswordResourceBean;
 import com.sample.auth.AuthResourceBean;
 import com.sample.singup.SingupResourceBean;
 import com.softteco.toolset.restlet.AbstractRestletApplication;
@@ -25,6 +26,7 @@ public class RestletApplication extends AbstractRestletApplication {
         router.attach("/auth", AuthResourceBean.class);
         router.attach("/singup", SingupResourceBean.class);
         router.attach("/account", AccountResourceBean.class);
+        router.attach("/account/password", PasswordResourceBean.class);
 
         /*
           ../api/swagger.js

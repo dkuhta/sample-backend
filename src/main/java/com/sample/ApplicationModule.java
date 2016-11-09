@@ -1,6 +1,7 @@
 package com.sample;
 
-import com.sample.mail.MailServiceBean;
+import com.sample.mail.GmailMailServiceBean;
+import com.sample.mail.SendGridMailServiceBean;
 import com.sample.util.ApplicationUtils;
 import com.softteco.toolset.AbstractApplicationModule;
 import com.softteco.toolset.mail.MailService;
@@ -43,6 +44,6 @@ public class ApplicationModule extends AbstractApplicationModule {
 
     @Override
     protected void configureApplication() {
-        bind(MailService.class).to(MailServiceBean.class);
+        bind(MailService.class).to(GmailMailServiceBean.class);
     }
 }

@@ -7,7 +7,7 @@ import com.softteco.toolset.mail.MailService;
 /**
  * Created by dkuhta on 3.8.15.
  */
-public class MailServiceBean extends AbstractSendGridMailService implements MailService {
+public class SendGridMailServiceBean extends AbstractSendGridMailService implements MailService {
 
     @Inject
     @Named("sendgrid.api.key")

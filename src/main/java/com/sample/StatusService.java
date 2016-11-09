@@ -1,5 +1,6 @@
 package com.sample;
 
+import com.softteco.toolset.jpa.DataNotFoundException;
 import com.softteco.toolset.restlet.AbstractStatusService;
 import com.softteco.toolset.security.exception.ResourceNotFoundException;
 import org.json.JSONException;
@@ -35,7 +36,9 @@ public class StatusService extends AbstractStatusService {
         if (t instanceof EntityExistsException) {
             return Status.CLIENT_ERROR_CONFLICT;
         }
-
+        if (t instanceof DataNotFoundException) {
+            return Status.CLIENT_ERROR_NOT_FOUND;
+        }
         LOGGER.error("Request error", t);
         t.printStackTrace(System.out);
         return Status.SERVER_ERROR_INTERNAL;

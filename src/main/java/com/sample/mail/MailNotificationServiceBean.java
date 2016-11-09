@@ -3,6 +3,7 @@ package com.sample.mail;
 import com.google.inject.Inject;
 import com.sample.I18nServiceBean;
 import com.sample.mail.async.MailAsyncService;
+import com.softteco.toolset.mail.MailService;
 
 import java.util.HashMap;
 
@@ -15,7 +16,7 @@ import java.util.HashMap;
 public class MailNotificationServiceBean implements MailNotificationService {
 
     @Inject
-    private MailAsyncService mailAsyncService;
+    private MailService mailAsyncService;
 
     @Inject
     private I18nServiceBean i18nServiceBean;
@@ -33,7 +34,13 @@ public class MailNotificationServiceBean implements MailNotificationService {
     }
 
     @Override
-    public void sendResetPassword(final String to, final String password) {
-
+    public void sendResetPassword(final String to, final String newPassword) {
+        final String subject = i18nServiceBean.getMessage(I18nServiceBean.BUNDLE_MAIL, "mail.password.reset.subject");
+        final String body = i18nServiceBean.getMessage(I18nServiceBean.BUNDLE_MAIL, "mail.password.reset.body", new HashMap<String, String>() {
+            {
+                put("newPassword", newPassword);
+            }
+        });
+        mailAsyncService.send(to, subject, body);
     }
 }
