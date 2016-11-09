@@ -34,13 +34,17 @@ public class RestletApplication extends AbstractRestletApplication {
 
     private void attachSwaggerSpecification1(Router router) {
         SwaggerSpecificationRestlet swaggerSpecificationRestlet = new SwaggerSpecificationRestlet(this);
-        swaggerSpecificationRestlet.setBasePath("http://localhost:8080/sample/api/");
+        swaggerSpecificationRestlet.setBasePath(getBasePath());
         swaggerSpecificationRestlet.attach(router);
     }
 
     private void attachSwaggerSpecification2(Router router) {
         Swagger2SpecificationRestlet restlet = new Swagger2SpecificationRestlet(this);
-        restlet.setBasePath("http://localhost:8080/sample/api/");
+        restlet.setBasePath(getBasePath());
         restlet.attach(router);
+    }
+
+    private String getBasePath() {
+        return "http://82.196.12.148:8080/zappy-backend/api/";
     }
 }

@@ -1,9 +1,9 @@
 package com.sample;
 
-import com.sample.auth.AuthService;
-import com.sample.auth.AuthServiceBean;
+import com.sample.mail.MailServiceBean;
 import com.sample.util.ApplicationUtils;
 import com.softteco.toolset.AbstractApplicationModule;
+import com.softteco.toolset.mail.MailService;
 import com.softteco.toolset.restlet.AbstractRestletApplication;
 import com.softteco.toolset.restlet.UserSession;
 
@@ -41,8 +41,8 @@ public class ApplicationModule extends AbstractApplicationModule {
         };
     }
 
-    /*@Override
+    @Override
     protected void configureApplication() {
-        bind(AuthService.class).to(AuthServiceBean.class);
-    }*/
+        bind(MailService.class).to(MailServiceBean.class);
+    }
 }

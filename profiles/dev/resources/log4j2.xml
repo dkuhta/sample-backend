@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="trace">
-    <Appenders>
+    <!--<Appenders>
         <RollingFile name="ALL" fileName="../logs/sample/all.log"
                      filePattern="../logs/sample/$${date:yyyy-MM}/%d{MM-dd-yyyy}-%i.log">
             <PatternLayout>
@@ -49,7 +49,7 @@
         </RollingFile>
     </Appenders>
     <Loggers>
-        <Logger name="by.belorusneft.sample" level="trace">
+        <Logger name="com.sample" level="trace">
             <AppenderRef ref="SAMPLE"/>
             <AppenderRef ref="CONSOLE"/>
         </Logger>
@@ -67,5 +67,5 @@
         <Root level="all">
             <AppenderRef ref="ASYNC"/>
         </Root>
-    </Loggers>
+    </Loggers>-->
 </Configuration>

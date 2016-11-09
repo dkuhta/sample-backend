@@ -1,7 +1,5 @@
 package com.sample;
 
-import com.google.inject.Inject;
-import com.google.inject.name.Named;
 import com.softteco.toolset.restlet.AbstractStatusService;
 import com.softteco.toolset.security.exception.ResourceNotFoundException;
 import org.json.JSONException;
@@ -16,14 +14,14 @@ public class StatusService extends AbstractStatusService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(StatusService.class);
 
-    @Inject(optional = true)
+    /*@Inject(optional = true)
     @Named("showstacktrace")
-    private boolean showStackTrace;
+    private boolean showStackTrace;*/
 
     @Override
     protected boolean showStackTrace() {
         //TODO fix config loading
-        return showStackTrace;
+        return true;
     }
 
     @Override
