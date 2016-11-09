@@ -14,7 +14,7 @@ import org.restlet.resource.Post;
  * @author Denis Kuhta
  * @since JDK1.8
  */
-@ImplementedBy(SingupResourceImpl.class)
+@ImplementedBy(SingupResourceBean.class)
 public interface SingupResource {
 
     @ApiOperation(value = "Sing up", tags = "singup")

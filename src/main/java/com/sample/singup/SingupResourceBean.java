@@ -11,7 +11,7 @@ import com.softteco.toolset.restlet.UserSession;
  * @author Denis Kuhta
  * @since JDK1.8
  */
-public class SingupResourceImpl extends AbstractResource<UserSession> implements SingupResource {
+public class SingupResourceBean extends AbstractResource<UserSession> implements SingupResource {
     
     @Inject
     private AccountService accountService;

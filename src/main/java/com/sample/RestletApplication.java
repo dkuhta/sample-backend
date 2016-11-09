@@ -1,7 +1,8 @@
 package com.sample;
 
+import com.sample.accounts.AccountResourceBean;
 import com.sample.auth.AuthResourceBean;
-import com.sample.singup.SingupResourceImpl;
+import com.sample.singup.SingupResourceBean;
 import com.softteco.toolset.restlet.AbstractRestletApplication;
 import com.softteco.toolset.restlet.AbstractStatusService;
 import org.restlet.ext.swagger.Swagger2SpecificationRestlet;
@@ -22,7 +23,8 @@ public class RestletApplication extends AbstractRestletApplication {
     @Override
     protected void createInboundRoot(final Router router) {
         router.attach("/auth", AuthResourceBean.class);
-        router.attach("/singup", SingupResourceImpl.class);
+        router.attach("/singup", SingupResourceBean.class);
+        router.attach("/account", AccountResourceBean.class);
 
         /*
           ../api/swagger.js

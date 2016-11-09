@@ -11,5 +11,7 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(MailNotificationServiceBean.class)
 public interface MailNotificationService {
 
-    void sendWelcomeEmail(String to);
+    void sendWelcome(String to);
+
+    void sendResetPassword(String to, String password);
 }

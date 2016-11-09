@@ -58,7 +58,7 @@ public class AccountServiceBean implements AccountService {
         accountDao.persist(personE);
         accountDao.flush();
 
-        mailNotificationService.sendWelcomeEmail(dto.email);
+        mailNotificationService.sendWelcome(dto.email);
 
         return accountDtoAssembler.assemble(personE);
     }
