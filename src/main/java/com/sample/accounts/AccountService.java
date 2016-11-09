@@ -20,7 +20,7 @@ public interface AccountService {
 
     AccountDto getAccount() throws AuthorizationException;
 
-    AccountDto updateAccount(AccountDto dto);
+    AccountDto updateAccount(AccountUpdateDto dto) throws AuthorizationException;
 
     void resetPassword(PasswordResetDto dto) throws DataNotFoundException;
 

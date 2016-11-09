@@ -35,5 +35,5 @@ public interface AccountResource {
             @ApiResponse(code = HttpStatus.SC_INTERNAL_SERVER_ERROR, message = HttpMessage.INTERNAL_SERVER_ERROR)
     })
     @Put("json")
-    AccountDto update(AccountDto dto);
+    AccountDto update(AccountUpdateDto dto) throws AuthorizationException;
 }

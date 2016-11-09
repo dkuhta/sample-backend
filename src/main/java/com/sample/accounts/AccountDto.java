@@ -19,4 +19,20 @@ public class AccountDto implements Serializable {
     public String name;
     @SkipAutoFill
     public Set<String> roles;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(final String email) {
+        this.email = email;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(final String name) {
+        this.name = name;
+    }
 }

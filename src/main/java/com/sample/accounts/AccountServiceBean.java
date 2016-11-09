@@ -87,8 +87,12 @@ public class AccountServiceBean implements AccountService {
     @AssertAuthorizedUser
     @Transactional
     @Override
-    public AccountDto updateAccount(final AccountDto dto) {
-        return null;
+    public AccountDto updateAccount(final AccountUpdateDto dto) throws AuthorizationException {
+        AccountEntity accountE = getSessionAccount();
+
+        //TODO update account
+
+        return accountDtoAssembler.assemble(accountE);
     }
 
     @Transactional

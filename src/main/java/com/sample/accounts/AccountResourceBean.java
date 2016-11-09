@@ -21,7 +21,7 @@ public class AccountResourceBean extends AbstractResource<UserSession> implement
     }
 
     @Override
-    public AccountDto update(final AccountDto dto) {
+    public AccountDto update(final AccountUpdateDto dto) throws AuthorizationException {
         return accountService.updateAccount(dto);
     }
 }
