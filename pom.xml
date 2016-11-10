@@ -295,6 +295,13 @@
             <version>2.2.2</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk -->
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk</artifactId>
+            <version>1.9.15</version>
+        </dependency>
+
     </dependencies>
 
     <repositories>
