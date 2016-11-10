@@ -1,6 +1,5 @@
 package com.sample.accounts;
 
-import com.sample.accounts.roles.Role;
 import com.sample.accounts.roles.RoleEntity;
 import com.softteco.toolset.bl.AutofillAbstractAssembler;
 

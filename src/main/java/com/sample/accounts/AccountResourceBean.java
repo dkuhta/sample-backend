@@ -2,7 +2,6 @@ package com.sample.accounts;
 
 import com.google.inject.Inject;
 import com.softteco.toolset.restlet.AbstractResource;
-import com.softteco.toolset.restlet.AuthorizationException;
 import com.softteco.toolset.restlet.UserSession;
 
 /**
@@ -16,12 +15,12 @@ public class AccountResourceBean extends AbstractResource<UserSession> implement
     @Inject
     private AccountService accountService;
 
-    public AccountDto getProfile() throws AuthorizationException {
+    public AccountDto getProfile() {
         return accountService.getAccount();
     }
 
     @Override
-    public AccountDto update(final AccountUpdateDto dto) throws AuthorizationException {
+    public AccountDto update(final AccountUpdateDto dto) {
         return accountService.updateAccount(dto);
     }
 }

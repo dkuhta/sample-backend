@@ -12,7 +12,6 @@ import com.sample.singup.SingupDto;
 import com.sample.util.PasswordUtils;
 import com.softteco.toolset.jpa.DataNotFoundException;
 import com.softteco.toolset.restlet.AuthorizationException;
-import com.softteco.toolset.restlet.AuthorizationStatus;
 import com.softteco.toolset.restlet.UserSession;
 import com.softteco.toolset.security.AssertAuthorizedUser;
 
@@ -70,24 +69,18 @@ public class AccountServiceBean implements AccountService {
 
     @AssertAuthorizedUser
     @Override
-    public AccountDto getAccount() throws AuthorizationException {
+    public AccountDto getAccount() {
         return accountDtoAssembler.assemble(getSessionAccount());
     }
 
-    private AccountEntity getSessionAccount() throws AuthorizationException {
-        AccountEntity accountE = accountDao.findByEmail(userSession.getUsername());
-
-        if (AccountStatus.DISABLED.equals(accountE.getStatus())) {
-            throw new AuthorizationException(AuthorizationStatus.DISABLED);
-        }
-
-        return accountE;
+    private AccountEntity getSessionAccount() {
+        return accountDao.findByEmail(userSession.getUsername());
     }
 
     @AssertAuthorizedUser
     @Transactional
     @Override
-    public AccountDto updateAccount(final AccountUpdateDto dto) throws AuthorizationException {
+    public AccountDto updateAccount(final AccountUpdateDto dto) {
         AccountEntity accountE = getSessionAccount();
 
         //TODO update account
@@ -117,7 +110,7 @@ public class AccountServiceBean implements AccountService {
     @AssertAuthorizedUser
     @Transactional
     @Override
-    public void updatePassword(final PasswordUpdateDto dto) throws AuthorizationException {
+    public void updatePassword(final PasswordUpdateDto dto) {
         AccountEntity accountE = getSessionAccount();
         accountE.setPassword(PasswordUtils.hashPassword(dto.password));
         accountDao.merge(accountE);

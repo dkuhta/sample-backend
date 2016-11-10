@@ -6,7 +6,7 @@ package com.sample;
  * @author Denis Kuhta
  * @since JDK1.8
  */
-public class HttpMessage {
+public final class HttpMessage {
     public static final String OK = "OK";
     public static final String UNAUTHORIZED = "UNAUTHORIZED";
     public static final String UNSUPPORTED_MEDIA_TYPE = "UNSUPPORTED MEDIA TYPE";
@@ -14,4 +14,7 @@ public class HttpMessage {
     public static final String INTERNAL_SERVER_ERROR = "INTERNAL SERVER ERROR";
     public static final String ENTITY_ALREADY_EXISTS = "ENTITY ALREADY EXISTS";
     public static final String NOT_FOUND = "OBJECT NOT FOUND";
+
+    private HttpMessage() {
+    }
 }

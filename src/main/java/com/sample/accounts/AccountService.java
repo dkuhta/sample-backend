@@ -5,7 +5,6 @@ import com.sample.accounts.password.PasswordResetDto;
 import com.sample.accounts.password.PasswordUpdateDto;
 import com.sample.singup.SingupDto;
 import com.softteco.toolset.jpa.DataNotFoundException;
-import com.softteco.toolset.restlet.AuthorizationException;
 
 /**
  * Created on 7.11.16.
@@ -18,11 +17,11 @@ public interface AccountService {
 
     AccountDto singup(SingupDto dto);
 
-    AccountDto getAccount() throws AuthorizationException;
+    AccountDto getAccount();
 
-    AccountDto updateAccount(AccountUpdateDto dto) throws AuthorizationException;
+    AccountDto updateAccount(AccountUpdateDto dto);
 
     void resetPassword(PasswordResetDto dto) throws DataNotFoundException;
 
-    void updatePassword(PasswordUpdateDto dto) throws AuthorizationException;
+    void updatePassword(PasswordUpdateDto dto);
 }

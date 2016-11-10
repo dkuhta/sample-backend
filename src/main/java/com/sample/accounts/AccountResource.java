@@ -1,7 +1,6 @@
 package com.sample.accounts;
 
 import com.sample.HttpMessage;
-import com.softteco.toolset.restlet.AuthorizationException;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiResponse;
 import com.wordnik.swagger.annotations.ApiResponses;
@@ -24,7 +23,7 @@ public interface AccountResource {
             @ApiResponse(code = HttpStatus.SC_INTERNAL_SERVER_ERROR, message = HttpMessage.INTERNAL_SERVER_ERROR)
     })
     @Get("json")
-    AccountDto getProfile() throws AuthorizationException;
+    AccountDto getProfile();
 
     @ApiOperation(value = "Update profile", tags = "account")
     @ApiResponses(value = {
@@ -35,5 +34,5 @@ public interface AccountResource {
             @ApiResponse(code = HttpStatus.SC_INTERNAL_SERVER_ERROR, message = HttpMessage.INTERNAL_SERVER_ERROR)
     })
     @Put("json")
-    AccountDto update(AccountUpdateDto dto) throws AuthorizationException;
+    AccountDto update(AccountUpdateDto dto);
 }

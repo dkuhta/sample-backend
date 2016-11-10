@@ -24,7 +24,7 @@ public class PasswordResourceBean extends AbstractResource<UserSession> implemen
     }
 
     @Override
-    public void update(final PasswordUpdateDto dto) throws AuthorizationException {
+    public void update(final PasswordUpdateDto dto) {
         accountService.updatePassword(dto);
     }
 }

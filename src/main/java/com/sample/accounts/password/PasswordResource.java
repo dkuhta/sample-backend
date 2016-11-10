@@ -3,7 +3,6 @@ package com.sample.accounts.password;
 import com.google.inject.ImplementedBy;
 import com.sample.HttpMessage;
 import com.softteco.toolset.jpa.DataNotFoundException;
-import com.softteco.toolset.restlet.AuthorizationException;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiResponse;
 import com.wordnik.swagger.annotations.ApiResponses;
@@ -40,5 +39,5 @@ public interface PasswordResource {
             @ApiResponse(code = HttpStatus.SC_INTERNAL_SERVER_ERROR, message = HttpMessage.INTERNAL_SERVER_ERROR)
     })
     @Put("json")
-    void update(PasswordUpdateDto dto) throws AuthorizationException;
+    void update(PasswordUpdateDto dto);
 }
