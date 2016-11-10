@@ -31,7 +31,7 @@ public class DeviceEntity {
 
     public static final String FIND_ALL_BY_PERSON_ID = "DeviceEntity.findAllByPersonId";
     public static final String FIND_BY_DEVICE = "DeviceEntity.findByDevice";
-    public static final String FIND_BY_DEVICE_AND_PERSON_EMAIL = "DeviceEntity.findByDeviceAndPersonEmail";
+    public static final String FIND_BY_DEVICE_AND_PERSON_EMAIL = "DeviceEntity.findByDeviceAndAccountEamil";
 
     @Id
     @GeneratedValue(generator = "DeviceEntity")
@@ -49,6 +49,10 @@ public class DeviceEntity {
 
     @Column(name = "lang", columnDefinition = "VARCHAR(10) NOT NULL")
     private String lang;
+
+    @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "VARCHAR(60) NOT NULL")
+    private DeviceStatus status;
 
     @ManyToOne
     @JoinColumn(name = "account_id", columnDefinition = "BIGINT(20) NOT NULL")
@@ -101,5 +105,13 @@ public class DeviceEntity {
 
     public void setAccount(final AccountEntity account) {
         this.account = account;
+    }
+
+    public DeviceStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(final DeviceStatus status) {
+        this.status = status;
     }
 }

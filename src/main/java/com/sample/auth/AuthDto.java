@@ -1,5 +1,7 @@
 package com.sample.auth;
 
+import com.sample.accounts.device.DeviceDto;
+
 import java.io.Serializable;
 
 /**
@@ -15,6 +17,8 @@ public class AuthDto implements Serializable {
     public String email;
     public String password;
 
+    public DeviceDto device;
+
     public String getEmail() {
         return email;
     }
@@ -29,5 +33,13 @@ public class AuthDto implements Serializable {
 
     public void setPassword(final String password) {
         this.password = password;
+    }
+
+    public DeviceDto getDevice() {
+        return device;
+    }
+
+    public void setDevice(final DeviceDto device) {
+        this.device = device;
     }
 }

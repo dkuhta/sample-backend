@@ -18,18 +18,18 @@ public class DeviceDaoBean extends AbstractJpaDao<DeviceEntity, Long> implements
     }
 
     @Override
-    public DeviceEntity findByDevice(final String deviceId, final int deviceType) {
+    public DeviceEntity findByDevice(final String deviceId, final DeviceType type) {
         final Query query = getEntityManager().createNamedQuery(DeviceEntity.FIND_BY_DEVICE);
         query.setParameter("deviceId", deviceId);
-        query.setParameter("type", deviceType);
+        query.setParameter("type", type);
         return getSingleResult(query);
     }
 
     @Override
-    public DeviceEntity findByDeviceAndPersonEmail(final String deviceId, final int deviceType, final String email) {
+    public DeviceEntity findByDeviceAndAccountEamil(final String deviceId, final DeviceType type, final String email) {
         final Query query = getEntityManager().createNamedQuery(DeviceEntity.FIND_BY_DEVICE_AND_PERSON_EMAIL);
         query.setParameter("deviceId", deviceId);
-        query.setParameter("type", deviceType);
+        query.setParameter("type", type);
         query.setParameter("email", email);
         return getSingleResult(query);
     }

@@ -2,20 +2,29 @@ package com.sample.accounts;
 
 import com.google.inject.Inject;
 import com.google.inject.persist.Transactional;
+import com.sample.accounts.device.DeviceDao;
+import com.sample.accounts.device.DeviceEntity;
+import com.sample.accounts.device.DeviceStatus;
 import com.sample.accounts.password.PasswordResetDto;
 import com.sample.accounts.password.PasswordUpdateDto;
 import com.sample.accounts.roles.Role;
 import com.sample.accounts.roles.RoleEntity;
 import com.sample.accounts.roles.RoleService;
+import com.sample.auth.AuthDto;
+import com.sample.auth.LogoutDto;
 import com.sample.mail.MailNotificationService;
 import com.sample.singup.SingupDto;
 import com.sample.util.PasswordUtils;
 import com.softteco.toolset.jpa.DataNotFoundException;
 import com.softteco.toolset.restlet.AuthorizationException;
+import com.softteco.toolset.restlet.AuthorizationStatus;
 import com.softteco.toolset.restlet.UserSession;
 import com.softteco.toolset.security.AssertAuthorizedUser;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.EntityExistsException;
+import java.text.MessageFormat;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -26,6 +35,8 @@ import java.util.Set;
  * @since JDK1.8
  */
 public class AccountServiceBean implements AccountService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(AccountServiceBean.class);
 
     @Inject
     private AccountDao accountDao;
@@ -41,6 +52,9 @@ public class AccountServiceBean implements AccountService {
 
     @Inject
     private UserSession userSession;
+
+    @Inject
+    private DeviceDao deviceDao;
 
     @Transactional
     @Override
@@ -65,6 +79,55 @@ public class AccountServiceBean implements AccountService {
         mailNotificationService.sendWelcome(dto.email);
 
         return accountDtoAssembler.assemble(personE);
+    }
+
+    @Override
+    public AccountDto authorize(final AuthDto dto) throws AuthorizationException {
+        AccountEntity accountE = accountDao.findByEmail(dto.email);
+
+        if (accountE == null) {
+            throw new AuthorizationException(AuthorizationStatus.INCORECT_LOGIN_OR_PASSWORD);
+        }
+
+        if (AccountStatus.DISABLED.equals(accountE.getStatus())) {
+            throw new AuthorizationException(AuthorizationStatus.DISABLED);
+        }
+
+        if (!PasswordUtils.checkPassword(dto.password, accountE.getPassword())) {
+            throw new AuthorizationException(AuthorizationStatus.INCORECT_LOGIN_OR_PASSWORD);
+        }
+
+        //TODO
+        /*DeviceEntity deviceE = deviceDao.findByDevice(dto.device.deviceId, dto.device.type);
+        if (deviceE == null) {
+            deviceEntity = deviceDtoAssembler.assemble(personData.device);
+            deviceEntity.setPerson(personEntity);
+            deviceDao.persist(deviceEntity);
+        } else {
+            deviceDtoAssembler.assemble(personData.device, deviceE);
+            deviceE.setPerson(personEntity);
+            deviceDao.merge(deviceE);
+        }*/
+
+        AccountDto accountDto = accountDtoAssembler.assemble(accountE);
+
+        userSession.setUsername(accountDto.email);
+        userSession.setRoles(accountDto.roles);
+
+        return accountDto;
+    }
+
+    @AssertAuthorizedUser
+    @Transactional
+    @Override
+    public void logout(final LogoutDto dto) {
+        final DeviceEntity deviceE = deviceDao.findByDeviceAndAccountEamil(dto.device.deviceId, dto.device.type, userSession.getUsername());
+        if (deviceE == null) {
+            LOGGER.error(MessageFormat.format("Device with id {0} for user with email {1} not found", dto.device.deviceId, userSession.getUsername()));
+            return;
+        }
+        deviceE.setStatus(DeviceStatus.LOGGED_OUT);
+        deviceDao.merge(deviceE);
     }
 
     @AssertAuthorizedUser

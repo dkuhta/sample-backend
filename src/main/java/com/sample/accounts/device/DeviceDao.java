@@ -10,15 +10,15 @@ import java.util.List;
 @ImplementedBy(DeviceDaoBean.class)
 public interface DeviceDao {
 
-    void persist(final DeviceEntity entity);
+    void persist(DeviceEntity entity);
 
-    DeviceEntity merge(final DeviceEntity entity);
+    DeviceEntity merge(DeviceEntity entity);
 
-    void remove(final DeviceEntity entity);
+    void remove(DeviceEntity entity);
 
     List<DeviceEntity> findAllByPersonId(final Long personId);
 
-    DeviceEntity findByDevice(final String deviceId, final int deviceType);
+    DeviceEntity findByDevice(final String deviceId, final DeviceType type);
 
-    DeviceEntity findByDeviceAndPersonEmail(final String deviceId, final int deviceType, final String email);
+    DeviceEntity findByDeviceAndAccountEamil(String deviceId, DeviceType device, String email);
 }
