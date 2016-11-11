@@ -18,14 +18,14 @@ public final class S3Path {
 
     public static S3Path create(final String... args) {
         S3Path s3Path = new S3Path();
-        String value = "";
+        StringBuilder valueSb = new StringBuilder();
         for (String folder : args) {
             if (StringUtils.isNoneEmpty(folder)) {
-                value += folder + "/";
+                valueSb.append(folder).append("/");
             }
         }
-        if (StringUtils.isNotEmpty(value)) {
-            s3Path.value = value.substring(0, value.length() - 1);
+        if (StringUtils.isNotEmpty(valueSb.toString())) {
+            s3Path.value = valueSb.toString().substring(0, valueSb.length() - 1);
         }
         return s3Path;
     }

@@ -73,8 +73,9 @@ public abstract class AbstractS3Service implements S3Service {
 
         AmazonS3 s3 = produceS3Client();
 
+        InputStream inputStream =  null;
         try {
-            InputStream inputStream = new FileInputStream(file);
+            inputStream = new FileInputStream(file);
             ObjectMetadata metadata = new ObjectMetadata();
             metadata.setContentType(getContentType(file));
             metadata.setContentLength((long) inputStream.available());
@@ -93,6 +94,10 @@ public abstract class AbstractS3Service implements S3Service {
         } catch (AmazonClientException ace) {
             logAmazonClientExc(ace);
             throw new S3Exception("Can't upload file!");
+        } finally {
+            if (inputStream != null) {
+                inputStream.close();
+            }
         }
     }
 
