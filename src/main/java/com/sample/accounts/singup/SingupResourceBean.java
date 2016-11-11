@@ -1,4 +1,4 @@
-package com.sample.singup;
+package com.sample.accounts.singup;
 
 import com.google.inject.Inject;
 import com.sample.accounts.AccountService;

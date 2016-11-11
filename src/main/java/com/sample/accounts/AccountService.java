@@ -3,9 +3,9 @@ package com.sample.accounts;
 import com.google.inject.ImplementedBy;
 import com.sample.accounts.password.PasswordResetDto;
 import com.sample.accounts.password.PasswordUpdateDto;
-import com.sample.auth.LoginDto;
-import com.sample.auth.LogoutDto;
-import com.sample.singup.SingupDto;
+import com.sample.accounts.login.LoginDto;
+import com.sample.accounts.login.LogoutDto;
+import com.sample.accounts.singup.SingupDto;
 import com.softteco.toolset.jpa.DataNotFoundException;
 import com.softteco.toolset.restlet.AuthorizationException;
 

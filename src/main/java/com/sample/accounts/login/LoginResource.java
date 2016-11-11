@@ -1,4 +1,4 @@
-package com.sample.auth;
+package com.sample.accounts.login;
 
 import com.sample.HttpMessage;
 import com.sample.accounts.AccountDto;
@@ -18,7 +18,7 @@ import org.restlet.resource.Post;
  * @since JDK1.8
  */
 @Api(value = "/auth", description = "Auth resource")
-public interface AuthResource {
+public interface LoginResource {
 
     @ApiOperation(value = "Login", tags = "auth")
     @ApiResponses(value = {

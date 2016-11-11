@@ -1,4 +1,4 @@
-package com.sample.auth;
+package com.sample.accounts.login;
 
 import com.google.inject.Inject;
 import com.sample.accounts.AccountDto;
@@ -13,7 +13,7 @@ import com.softteco.toolset.restlet.UserSession;
  * @author Denis Kuhta
  * @since JDK1.8
  */
-public class AuthResourceBean extends AbstractResource<UserSession> implements AuthResource {
+public class LoginResourceBean extends AbstractResource<UserSession> implements LoginResource {
 
     @Inject
     private AccountService accountService;

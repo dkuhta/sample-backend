@@ -1,4 +1,4 @@
-package com.sample.auth;
+package com.sample.accounts.login;
 
 import com.sample.accounts.device.DeviceLogoutDto;
 

@@ -2,8 +2,8 @@ package com.sample;
 
 import com.sample.accounts.AccountResourceBean;
 import com.sample.accounts.password.PasswordResourceBean;
-import com.sample.auth.AuthResourceBean;
-import com.sample.singup.SingupResourceBean;
+import com.sample.accounts.login.LoginResourceBean;
+import com.sample.accounts.singup.SingupResourceBean;
 import com.softteco.toolset.restlet.AbstractRestletApplication;
 import com.softteco.toolset.restlet.AbstractStatusService;
 import org.restlet.ext.swagger.Swagger2SpecificationRestlet;
@@ -23,7 +23,7 @@ public class RestletApplication extends AbstractRestletApplication {
 
     @Override
     protected void createInboundRoot(final Router router) {
-        router.attach("/auth", AuthResourceBean.class);
+        router.attach("/auth", LoginResourceBean.class);
         router.attach("/singup", SingupResourceBean.class);
         router.attach("/account", AccountResourceBean.class);
         router.attach("/account/password", PasswordResourceBean.class);

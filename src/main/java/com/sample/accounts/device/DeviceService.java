@@ -2,7 +2,6 @@ package com.sample.accounts.device;
 
 import com.google.inject.ImplementedBy;
 import com.sample.accounts.AccountEntity;
-import com.sample.auth.LogoutDto;
 
 /**
  * Created on 11.11.16.
