@@ -2,7 +2,6 @@ package com.sample.mail;
 
 import com.google.inject.Inject;
 import com.sample.I18nServiceBean;
-import com.sample.mail.async.MailAsyncService;
 import com.softteco.toolset.mail.MailService;
 
 import java.util.HashMap;

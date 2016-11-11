@@ -1,7 +1,6 @@
 package com.sample;
 
 import com.sample.mail.GmailMailServiceBean;
-import com.sample.mail.SendGridMailServiceBean;
 import com.sample.util.ApplicationUtils;
 import com.softteco.toolset.AbstractApplicationModule;
 import com.softteco.toolset.mail.MailService;

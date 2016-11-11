@@ -4,7 +4,6 @@ import com.google.inject.Inject;
 import com.sample.accounts.AccountService;
 import com.softteco.toolset.jpa.DataNotFoundException;
 import com.softteco.toolset.restlet.AbstractResource;
-import com.softteco.toolset.restlet.AuthorizationException;
 import com.softteco.toolset.restlet.UserSession;
 
 /**

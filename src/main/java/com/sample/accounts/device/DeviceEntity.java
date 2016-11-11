@@ -94,7 +94,7 @@ public class DeviceEntity {
         return lang;
     }
 
-    public void setLang(String lang) {
+    public void setLang(final String lang) {
         this.lang = lang;
     }
 

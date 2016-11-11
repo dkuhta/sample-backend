@@ -1,7 +1,5 @@
 package com.sample.accounts.device;
 
-import java.io.Serializable;
-
 /**
  * Created by dkuhta on 27.4.15.
  */

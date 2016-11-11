@@ -36,13 +36,13 @@ public class RestletApplication extends AbstractRestletApplication {
         attachSwaggerSpecification2(router);
     }
 
-    private void attachSwaggerSpecification1(Router router) {
+    private void attachSwaggerSpecification1(final Router router) {
         SwaggerSpecificationRestlet swaggerSpecificationRestlet = new SwaggerSpecificationRestlet(this);
         swaggerSpecificationRestlet.setBasePath(getBasePath());
         swaggerSpecificationRestlet.attach(router);
     }
 
-    private void attachSwaggerSpecification2(Router router) {
+    private void attachSwaggerSpecification2(final Router router) {
         Swagger2SpecificationRestlet restlet = new Swagger2SpecificationRestlet(this);
         restlet.setBasePath(getBasePath());
         restlet.attach(router);
