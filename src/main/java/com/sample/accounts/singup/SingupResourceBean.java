@@ -12,10 +12,10 @@ import com.softteco.toolset.restlet.UserSession;
  * @since JDK1.8
  */
 public class SingupResourceBean extends AbstractResource<UserSession> implements SingupResource {
-    
+
     @Inject
     private AccountService accountService;
-    
+
     @Override
     public void singup(final SingupDto dto) {
         accountService.singup(dto);

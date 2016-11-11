@@ -23,9 +23,12 @@ import javax.persistence.Table;
         @Index(name = "dev_id_index", columnList = "deviceId, type")
 })
 @NamedQueries({
-        @NamedQuery(name = DeviceEntity.FIND_ALL_BY_PERSON_ID, query = "select d from DeviceEntity d where d.account.id = :personId"),
-        @NamedQuery(name = DeviceEntity.FIND_BY_DEVICE, query = "select d from DeviceEntity d where d.deviceId = :deviceId and d.type = :type"),
-        @NamedQuery(name = DeviceEntity.FIND_BY_DEVICE_AND_PERSON_EMAIL, query = "select d from DeviceEntity d where d.deviceId = :deviceId and d.account.email = :email and d.type = :type")
+        @NamedQuery(name = DeviceEntity.FIND_ALL_BY_PERSON_ID,
+                query = "select d from DeviceEntity d where d.account.id = :personId"),
+        @NamedQuery(name = DeviceEntity.FIND_BY_DEVICE,
+                query = "select d from DeviceEntity d where d.deviceId = :deviceId and d.type = :type"),
+        @NamedQuery(name = DeviceEntity.FIND_BY_DEVICE_AND_PERSON_EMAIL,
+                query = "select d from DeviceEntity d where d.deviceId = :deviceId and d.account.email = :email and d.type = :type")
 })
 public class DeviceEntity {
 
