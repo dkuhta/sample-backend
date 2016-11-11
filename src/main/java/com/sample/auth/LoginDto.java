@@ -10,7 +10,7 @@ import java.io.Serializable;
  * @author Denis Kuhta
  * @since JDK1.8
  */
-public class AuthDto implements Serializable {
+public class LoginDto implements Serializable {
 
     private static final long serialVersionUID = 976450295147703248L;
 

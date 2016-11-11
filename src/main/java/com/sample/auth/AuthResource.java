@@ -28,7 +28,7 @@ public interface AuthResource {
             @ApiResponse(code = HttpStatus.SC_INTERNAL_SERVER_ERROR, message = HttpMessage.INTERNAL_SERVER_ERROR)
     })
     @Post("json")
-    AccountDto login(AuthDto dto) throws AuthorizationException;
+    AccountDto login(LoginDto dto) throws AuthorizationException;
 
     @ApiOperation(value = "Logout", tags = "auth")
     @ApiResponses(value = {

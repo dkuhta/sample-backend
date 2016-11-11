@@ -2,15 +2,13 @@ package com.sample.accounts;
 
 import com.google.inject.Inject;
 import com.google.inject.persist.Transactional;
-import com.sample.accounts.device.DeviceDao;
-import com.sample.accounts.device.DeviceEntity;
-import com.sample.accounts.device.DeviceStatus;
+import com.sample.accounts.device.DeviceService;
 import com.sample.accounts.password.PasswordResetDto;
 import com.sample.accounts.password.PasswordUpdateDto;
 import com.sample.accounts.roles.Role;
 import com.sample.accounts.roles.RoleEntity;
 import com.sample.accounts.roles.RoleService;
-import com.sample.auth.AuthDto;
+import com.sample.auth.LoginDto;
 import com.sample.auth.LogoutDto;
 import com.sample.mail.MailNotificationService;
 import com.sample.singup.SingupDto;
@@ -20,11 +18,8 @@ import com.softteco.toolset.restlet.AuthorizationException;
 import com.softteco.toolset.restlet.AuthorizationStatus;
 import com.softteco.toolset.restlet.UserSession;
 import com.softteco.toolset.security.AssertAuthorizedUser;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.persistence.EntityExistsException;
-import java.text.MessageFormat;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -35,8 +30,6 @@ import java.util.Set;
  * @since JDK1.8
  */
 public class AccountServiceBean implements AccountService {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(AccountServiceBean.class);
 
     @Inject
     private AccountDao accountDao;
@@ -54,7 +47,8 @@ public class AccountServiceBean implements AccountService {
     private UserSession userSession;
 
     @Inject
-    private DeviceDao deviceDao;
+    private DeviceService deviceService;
+
 
     @Transactional
     @Override
@@ -82,8 +76,8 @@ public class AccountServiceBean implements AccountService {
     }
 
     @Override
-    public AccountDto authorize(final AuthDto dto) throws AuthorizationException {
-        AccountEntity accountE = accountDao.findByEmail(dto.email);
+    public AccountDto login(final LoginDto loginDto) throws AuthorizationException {
+        AccountEntity accountE = accountDao.findByEmail(loginDto.email);
 
         if (accountE == null) {
             throw new AuthorizationException(AuthorizationStatus.INCORECT_LOGIN_OR_PASSWORD);
@@ -93,21 +87,11 @@ public class AccountServiceBean implements AccountService {
             throw new AuthorizationException(AuthorizationStatus.DISABLED);
         }
 
-        if (!PasswordUtils.checkPassword(dto.password, accountE.getPassword())) {
+        if (!PasswordUtils.checkPassword(loginDto.password, accountE.getPassword())) {
             throw new AuthorizationException(AuthorizationStatus.INCORECT_LOGIN_OR_PASSWORD);
         }
 
-        //TODO
-        /*DeviceEntity deviceE = deviceDao.findByDevice(dto.device.deviceId, dto.device.type);
-        if (deviceE == null) {
-            deviceEntity = deviceDtoAssembler.assemble(personData.device);
-            deviceEntity.setPerson(personEntity);
-            deviceDao.persist(deviceEntity);
-        } else {
-            deviceDtoAssembler.assemble(personData.device, deviceE);
-            deviceE.setPerson(personEntity);
-            deviceDao.merge(deviceE);
-        }*/
+        deviceService.login(loginDto.device, accountE);
 
         AccountDto accountDto = accountDtoAssembler.assemble(accountE);
 
@@ -121,13 +105,7 @@ public class AccountServiceBean implements AccountService {
     @Transactional
     @Override
     public void logout(final LogoutDto dto) {
-        final DeviceEntity deviceE = deviceDao.findByDeviceAndAccountEamil(dto.device.deviceId, dto.device.type, userSession.getUsername());
-        if (deviceE == null) {
-            LOGGER.error(MessageFormat.format("Device with id {0} for user with email {1} not found", dto.device.deviceId, userSession.getUsername()));
-            return;
-        }
-        deviceE.setStatus(DeviceStatus.LOGGED_OUT);
-        deviceDao.merge(deviceE);
+        deviceService.logout(dto.device);
     }
 
     @AssertAuthorizedUser

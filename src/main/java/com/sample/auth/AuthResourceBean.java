@@ -18,8 +18,8 @@ public class AuthResourceBean extends AbstractResource<UserSession> implements A
     @Inject
     private AccountService accountService;
 
-    public AccountDto login(final AuthDto dto) throws AuthorizationException {
-        return accountService.authorize(dto);
+    public AccountDto login(final LoginDto dto) throws AuthorizationException {
+        return accountService.login(dto);
     }
 
     public void logout(final LogoutDto dto) {
