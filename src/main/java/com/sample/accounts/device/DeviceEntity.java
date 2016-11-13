@@ -24,20 +24,20 @@ import java.io.Serializable;
         @Index(name = "dev_id_index", columnList = "DEVICE_ID, TYPE")
 })
 @NamedQueries({
-        @NamedQuery(name = DeviceEntity.FIND_ALL_BY_PERSON_ID,
+        @NamedQuery(name = DeviceEntity.FIND_ALL_BY_ACCOUNT_ID,
                 query = "select d from DeviceEntity d where d.account.id = :personId"),
         @NamedQuery(name = DeviceEntity.FIND_BY_DEVICE,
                 query = "select d from DeviceEntity d where d.deviceId = :deviceId and d.type = :type"),
-        @NamedQuery(name = DeviceEntity.FIND_BY_DEVICE_AND_PERSON_EMAIL,
+        @NamedQuery(name = DeviceEntity.FIND_BY_DEVICE_AND_ACCOUNT_EMAIL,
                 query = "select d from DeviceEntity d where d.deviceId = :deviceId and d.account.email = :email and d.type = :type")
 })
 public class DeviceEntity implements Serializable {
 
     private static final long serialVersionUID = 804698866511567133L;
 
-    public static final String FIND_ALL_BY_PERSON_ID = "DeviceEntity.findAllByPersonId";
+    public static final String FIND_ALL_BY_ACCOUNT_ID = "DeviceEntity.findAllByAccountId";
     public static final String FIND_BY_DEVICE = "DeviceEntity.findByDevice";
-    public static final String FIND_BY_DEVICE_AND_PERSON_EMAIL = "DeviceEntity.findByDeviceAndAccountEamil";
+    public static final String FIND_BY_DEVICE_AND_ACCOUNT_EMAIL = "DeviceEntity.findByDeviceAndAccountEamil";
 
     @Id
     @GeneratedValue(generator = "DeviceEntity")

@@ -16,7 +16,7 @@ public interface DeviceDao {
 
     void remove(DeviceEntity entity);
 
-    List<DeviceEntity> findAllByPersonId(final Long personId);
+    List<DeviceEntity> findAllByAccountId(final Long personId);
 
     DeviceEntity findByDevice(final String deviceId, final DeviceType type);
 

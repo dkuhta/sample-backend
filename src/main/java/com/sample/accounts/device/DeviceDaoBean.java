@@ -11,8 +11,8 @@ import java.util.List;
 public class DeviceDaoBean extends AbstractJpaDao<DeviceEntity, Long> implements DeviceDao {
 
     @Override
-    public List<DeviceEntity> findAllByPersonId(final Long personId) {
-        final Query query = getEntityManager().createNamedQuery(DeviceEntity.FIND_ALL_BY_PERSON_ID);
+    public List<DeviceEntity> findAllByAccountId(final Long personId) {
+        final Query query = getEntityManager().createNamedQuery(DeviceEntity.FIND_ALL_BY_ACCOUNT_ID);
         query.setParameter("personId", personId);
         return getResultList(query);
     }
@@ -27,7 +27,7 @@ public class DeviceDaoBean extends AbstractJpaDao<DeviceEntity, Long> implements
 
     @Override
     public DeviceEntity findByDeviceAndAccountEamil(final String deviceId, final DeviceType type, final String email) {
-        final Query query = getEntityManager().createNamedQuery(DeviceEntity.FIND_BY_DEVICE_AND_PERSON_EMAIL);
+        final Query query = getEntityManager().createNamedQuery(DeviceEntity.FIND_BY_DEVICE_AND_ACCOUNT_EMAIL);
         query.setParameter("deviceId", deviceId);
         query.setParameter("type", type);
         query.setParameter("email", email);
