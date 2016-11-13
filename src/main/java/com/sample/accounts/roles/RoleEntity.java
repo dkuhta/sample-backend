@@ -1,5 +1,6 @@
 package com.sample.accounts.roles;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -16,7 +17,7 @@ import java.io.Serializable;
  * @since JDK1.8
  */
 @Entity
-@Table(name = "role")
+@Table(name = "ROLE")
 public class RoleEntity implements Serializable {
 
     private static final long serialVersionUID = 7324799429062818953L;
@@ -26,6 +27,7 @@ public class RoleEntity implements Serializable {
     private Long id;
 
     @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "VARCHAR(60) NOT NULL UNIQUE")
     private Role role;
 
     public Long getId() {

@@ -21,7 +21,7 @@ import javax.persistence.Table;
  * @since JDK1.8
  */
 @Entity
-@Table(name = "account")
+@Table(name = "ACCOUNT")
 public class AccountEntity implements Serializable {
 
     private static final long serialVersionUID = -1958421373759856954L;

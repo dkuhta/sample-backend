@@ -14,13 +14,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 /**
  * Created by dkuhta on 27.4.15.
  */
 @Entity
-@Table(name = "device", indexes = {
-        @Index(name = "dev_id_index", columnList = "deviceId, type")
+@Table(name = "DEVICE", indexes = {
+        @Index(name = "dev_id_index", columnList = "DEVICE_ID, TYPE")
 })
 @NamedQueries({
         @NamedQuery(name = DeviceEntity.FIND_ALL_BY_PERSON_ID,
@@ -30,7 +31,9 @@ import javax.persistence.Table;
         @NamedQuery(name = DeviceEntity.FIND_BY_DEVICE_AND_PERSON_EMAIL,
                 query = "select d from DeviceEntity d where d.deviceId = :deviceId and d.account.email = :email and d.type = :type")
 })
-public class DeviceEntity {
+public class DeviceEntity implements Serializable {
+
+    private static final long serialVersionUID = 804698866511567133L;
 
     public static final String FIND_ALL_BY_PERSON_ID = "DeviceEntity.findAllByPersonId";
     public static final String FIND_BY_DEVICE = "DeviceEntity.findByDevice";
@@ -41,16 +44,16 @@ public class DeviceEntity {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "type", columnDefinition = "VARCHAR(60) NOT NULL")
+    @Column(name = "TYPE", columnDefinition = "VARCHAR(60) NOT NULL")
     private DeviceType type;
 
-    @Column(name = "device_id")
+    @Column(name = "DEVICE_ID")
     private String deviceId;
 
-    @Column(name = "notification_token")
+    @Column(name = "NOTIFICATION_TOKEN")
     private String notificationToken;
 
-    @Column(name = "lang", columnDefinition = "VARCHAR(10) NOT NULL")
+    @Column(name = "LANG", columnDefinition = "VARCHAR(10) NOT NULL")
     private String lang;
 
     @Enumerated(EnumType.STRING)
@@ -58,7 +61,7 @@ public class DeviceEntity {
     private DeviceStatus status;
 
     @ManyToOne
-    @JoinColumn(name = "account_id", columnDefinition = "BIGINT(20) NOT NULL")
+    @JoinColumn(name = "ACCOUNT_ID", columnDefinition = "BIGINT(20) NOT NULL")
     private AccountEntity account;
 
     public Long getId() {
